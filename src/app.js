@@ -38,12 +38,11 @@ app.post("/books", (req, res) => {
 app.get("/books/:id", (req, res) => {
   const index = getBooks(req.params.id);
 
-  if (book) {
+  if (index) {
     res.status(200).json(books[index]);
   }
 
   res.status(404).send("Livro não encontrado");
 });
-
 
 export default app;
