@@ -3,11 +3,11 @@ import express from "express";
 const books = [
   {
     id: 1,
-    titulo: "O Senhor dos Anéis",
+    title: "O Senhor dos Anéis",
   },
   {
     id: 2,
-    titulo: "O Hobbit",
+    title: "O Hobbit",
   },
 ];
 
@@ -43,6 +43,17 @@ app.get("/books/:id", (req, res) => {
   }
 
   res.status(404).send("Livro não encontrado");
+});
+
+app.put("/books/:id", (req, res) => {
+    const index = getBooks(req.params.id);
+
+    if (index) {
+        books[index].title = req.body.title;
+        res.status(200).json(books[index]);
+    }
+    
+    res.status(404).send("Livro não encontrado");
 });
 
 export default app;
