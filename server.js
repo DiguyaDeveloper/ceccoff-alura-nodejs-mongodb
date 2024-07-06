@@ -1,20 +1,7 @@
-import http from "http";
+import app from "./src/app.js";
 
 const PORT = 3000;
 
-const ROUTES = {
-    "/": "Curso de Express API",
-    "/book": "Entrei na rota livros",
-    "/author": "Entrei na rota autores"
-}
-
-const server = http.createServer((req, res) => {
-
-    res.writeHead(200, { "Content-Type": "text/plain"});
-    res.end(ROUTES[req.url]);
-});
-
-server.listen(PORT, () => {
-
+app.listen(PORT, () => {
     console.log(`Server started in port: ${PORT}`)
 });
