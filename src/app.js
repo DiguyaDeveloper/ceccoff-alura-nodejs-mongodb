@@ -1,24 +1,24 @@
-import express from "express";
-import databaseConnect from "./config/dbConnect.js";
+import express from 'express';
+import databaseConnect from './config/dbConnect.js';
 
 const connection = await databaseConnect();
 
-connection.on("error", (error) => {
-    console.error("Erro de conexão.", error);
+connection.on('error', (error) => {
+  console.error('Erro de conexão.', error);
 });
 
-connection.once("open", () => {
-    console.log("Conexão realizada com sucesso.")
+connection.once('open', () => {
+  console.log('Conexão realizada com sucesso.');
 });
 
 const books = [
   {
     id: 1,
-    title: "O Senhor dos Anéis",
+    title: 'O Senhor dos Anéis',
   },
   {
     id: 2,
-    title: "O Hobbit",
+    title: 'O Hobbit',
   },
 ];
 
@@ -33,30 +33,30 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.status(200).send("Curso de Node.js");
+app.get('/', (req, res) => {
+  res.status(200).send('Curso de Node.js');
 });
 
-app.get("/books", (req, res) => {
+app.get('/books', (req, res) => {
   res.status(200).json(books);
 });
 
-app.post("/books", (req, res) => {
+app.post('/books', (req, res) => {
   books.push(req.body);
-  res.status(201).send("Livro cadastrado com sucesso");
+  res.status(201).send('Livro cadastrado com sucesso');
 });
 
-app.get("/books/:id", (req, res) => {
+app.get('/books/:id', (req, res) => {
   const index = getBooks(req.params.id);
 
   if (index) {
     res.status(200).json(books[index]);
   }
 
-  res.status(404).send("Livro não encontrado");
+  res.status(404).send('Livro não encontrado');
 });
 
-app.put("/books/:id", (req, res) => {
+app.put('/books/:id', (req, res) => {
   const index = getBooks(req.params.id);
 
   if (index) {
@@ -64,10 +64,10 @@ app.put("/books/:id", (req, res) => {
     res.status(200).json(books[index]);
   }
 
-  res.status(404).send("Livro não encontrado");
+  res.status(404).send('Livro não encontrado');
 });
 
-app.delete("/books/:id", (req, res) => {
+app.delete('/books/:id', (req, res) => {
   const index = getBooks(req.params.id);
 
   if (index) {
@@ -75,8 +75,7 @@ app.delete("/books/:id", (req, res) => {
     res.status(200).json(books[index]);
   }
 
-  res.status(404).send("Livro não encontrado");
+  res.status(404).send('Livro não encontrado');
 });
-
 
 export default app;
