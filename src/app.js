@@ -46,14 +46,25 @@ app.get("/books/:id", (req, res) => {
 });
 
 app.put("/books/:id", (req, res) => {
-    const index = getBooks(req.params.id);
+  const index = getBooks(req.params.id);
 
-    if (index) {
-        books[index].title = req.body.title;
-        res.status(200).json(books[index]);
-    }
-    
-    res.status(404).send("Livro não encontrado");
+  if (index) {
+    books[index].title = req.body.title;
+    res.status(200).json(books[index]);
+  }
+
+  res.status(404).send("Livro não encontrado");
+});
+
+app.delete("/books/:id", (req, res) => {
+  const index = getBooks(req.params.id);
+
+  if (index) {
+    books.splice(index, 1);
+    res.status(200).json(books[index]);
+  }
+
+  res.status(404).send("Livro não encontrado");
 });
 
 export default app;
