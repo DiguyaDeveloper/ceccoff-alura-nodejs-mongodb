@@ -1,4 +1,15 @@
 import express from "express";
+import databaseConnect from "./config/dbConnect.js";
+
+const connection = await databaseConnect();
+
+connection.on("error", (error) => {
+    console.error("Erro de conexão.", error);
+});
+
+connection.once("open", () => {
+    console.log("Conexão realizada com sucesso.")
+});
 
 const books = [
   {
@@ -66,5 +77,6 @@ app.delete("/books/:id", (req, res) => {
 
   res.status(404).send("Livro não encontrado");
 });
+
 
 export default app;
