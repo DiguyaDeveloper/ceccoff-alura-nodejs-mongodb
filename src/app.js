@@ -19,6 +19,6 @@ app.get("/books", (req, res) => {
         }
     ]
     res.status(200).json(books);
-})
+});
 
 export default app;
